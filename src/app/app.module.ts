@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { StoreModule } from "@ngrx/store";
@@ -13,6 +12,7 @@ import { EmployeeDetailsComponent } from "./employee-details/employee-details.co
 import { EmployeeEditComponent } from "./employee-edit/employee-edit.component";
 import { LoginComponent } from "./login/login.component";
 import { AppCommonModule } from "./app.common.module";
+import { reducers, metaReducers } from "./reducers";
 
 @NgModule({
   declarations: [
@@ -32,6 +32,7 @@ import { AppCommonModule } from "./app.common.module";
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([]),
     BrowserAnimationsModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
