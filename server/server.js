@@ -9,9 +9,11 @@ const users = [
     { name: 'user3', password: 'user@3' },
 ];
 
-const isAuthorized = (userdata) => {
-    const { username, password } = userdata;
-    return !!users.find(user => (user.name === username && user.password === password));
+let user = {};
+
+const isAuthorized = (req) => {
+    const username = req.get('authorization');
+    return user.name && username === user.name;
 }
 
 // Set default middlewares (logger, static, cors and no-cache)
@@ -22,9 +24,20 @@ server.get('/echo', (req, res) => {
     res.jsonp(req.query)
 })
 
-/* server.post('/login', (req,res) => {
-
-}); */
+server.use(jsonServer.bodyParser);
+server.post('/authenticate', (req, res) => {
+    if (req.body) {
+        const { username, password: pwd } = req.body;
+        const match = users.find(item => (item.name === username && item.password === pwd))
+        if (match) {
+            user = { ...match }
+            res.status(200).send({ user: { username: match.name } });
+        } else {
+            res.status(404).send({ user: {} });
+        }
+    }
+    res.status(403).send();
+});
 
 server.use((req, res, next) => {
     if (isAuthorized(req)) { // add your authorization logic here
@@ -36,7 +49,7 @@ server.use((req, res, next) => {
 
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
-server.use(jsonServer.bodyParser)
+// server.use(jsonServer.bodyParser)
 server.use((req, res, next) => {
     if (req.method === 'POST') {
         req.body.createdAt = Date.now()

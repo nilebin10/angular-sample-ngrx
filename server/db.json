@@ -1117,6 +1117,48 @@
       "manager_name": "Fanni Hallam",
       "emp_id": "31-001-5647",
       "id": 86
+    },
+    {
+      "first_name": "Ganni",
+      "last_name": "Hallam",
+      "email": "fhallam22@bravesites.com",
+      "gender": "Male",
+      "birth_date": "1991-08-26T14:42:03Z",
+      "hire_date": "2018-03-20T18:09:55Z",
+      "dept_no": 102,
+      "dept_name": "Accounting",
+      "manager_name": "Fanni Hallam",
+      "emp_id": "31-001-5647",
+      "createdAt": 1629088231764,
+      "id": 87
+    },
+    {
+      "first_name": "Ganni",
+      "last_name": "Hallam",
+      "email": "fhallam22@bravesites.com",
+      "gender": "Male",
+      "birth_date": "1991-08-26T14:42:03Z",
+      "hire_date": "2018-03-20T18:09:55Z",
+      "dept_no": 102,
+      "dept_name": "Accounting",
+      "manager_name": "Fanni Hallam",
+      "emp_id": "31-001-5647",
+      "createdAt": 1629089671235,
+      "id": 88
+    },
+    {
+      "first_name": "Ganni",
+      "last_name": "Hallam",
+      "email": "fhallam22@bravesites.com",
+      "gender": "Male",
+      "birth_date": "1991-08-26T14:42:03Z",
+      "hire_date": "2018-03-20T18:09:55Z",
+      "dept_no": 102,
+      "dept_name": "Accounting",
+      "manager_name": "Fanni Hallam",
+      "emp_id": "31-001-5647",
+      "createdAt": 1629090300752,
+      "id": 89
     }
   ]
 }

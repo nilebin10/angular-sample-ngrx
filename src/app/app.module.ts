@@ -1,6 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { StoreModule } from "@ngrx/store";
@@ -13,7 +12,10 @@ import { EmployeeDetailsComponent } from "./employee-details/employee-details.co
 import { EmployeeEditComponent } from "./employee-edit/employee-edit.component";
 import { LoginComponent } from "./login/login.component";
 import { AppCommonModule } from "./app.common.module";
-import {HttpClientModule} from '@angular/common/http';
+import { reducers, metaReducers } from "./reducers";
+import { UserEffects } from "./effects/user.effects";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptor } from "./auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -27,15 +29,22 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     AppCommonModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({}, {}),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([]),
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([UserEffects]),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })

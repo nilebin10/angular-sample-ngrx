@@ -30,7 +30,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.httpSvc.getEmployeeList().subscribe((res:any)=>{
+    this.httpSvc.getEmployeeDetails().subscribe((res:any)=>{
       this.dataSource = res;
       console.log(this.dataSource);
     })
