@@ -13,6 +13,7 @@ import { EmployeeDetailsComponent } from "./employee-details/employee-details.co
 import { EmployeeEditComponent } from "./employee-edit/employee-edit.component";
 import { LoginComponent } from "./login/login.component";
 import { AppCommonModule } from "./app.common.module";
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AppCommonModule } from "./app.common.module";
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([]),
     BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
