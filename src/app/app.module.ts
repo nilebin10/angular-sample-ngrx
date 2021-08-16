@@ -13,6 +13,9 @@ import { EmployeeEditComponent } from "./employee-edit/employee-edit.component";
 import { LoginComponent } from "./login/login.component";
 import { AppCommonModule } from "./app.common.module";
 import { reducers, metaReducers } from "./reducers";
+import { UserEffects } from "./effects/user.effects";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptor } from "./auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -26,15 +29,21 @@ import { reducers, metaReducers } from "./reducers";
     BrowserModule,
     AppRoutingModule,
     AppCommonModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({}, {}),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([]),
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([UserEffects]),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })

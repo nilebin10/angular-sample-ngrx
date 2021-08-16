@@ -10,20 +10,20 @@ export class AppService {
 
   authenticate(user: any) {
     const body: any = {
-      user,
+      ...user,
     };
-    return this.http.post(environment.API_URI, body);
+    return this.http.post(`${environment.API_URI}/authenticate`, body);
   }
 
   getEmployeeDetails() {
-    return this.http.get(`${environment.API_URI}\employees`);
+    return this.http.get(`${environment.API_URI}/employees`);
   }
 
   addEmployee(employee: any) {
     const body = {
       employee,
     };
-    return this.http.post(`${environment.API_URI}\employees`, body);
+    return this.http.post(`${environment.API_URI}/employees`, body);
   }
 
   updateEmployee({ employee, id }: any) {
@@ -31,13 +31,13 @@ export class AppService {
       employee,
       id,
     };
-    return this.http.post(`${environment.API_URI}\employees`, body);
+    return this.http.post(`${environment.API_URI}/employees`, body);
   }
 
   deleteEmployee(id: any) {
     const body = {
       id,
     };
-    return this.http.delete(`${environment.API_URI}\employees`, { body });
+    return this.http.delete(`${environment.API_URI}/employees`, { body });
   }
 }

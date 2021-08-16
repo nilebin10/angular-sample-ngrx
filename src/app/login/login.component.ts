@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { Store, select } from "@ngrx/store";
+import * as userAction from "../actions/user.actions";
 
 @Component({
   selector: "app-login",
@@ -8,11 +10,17 @@ import { FormControl, FormGroup } from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
   error: any;
-  form = new FormGroup({
-    username: new FormControl(""),
-    password: new FormControl(""),
+  userForm = this.fb.group({
+    username: "",
+    password: "",
   });
-  constructor() {}
+  constructor(private store: Store, private fb: FormBuilder) {}
 
   ngOnInit(): void {}
+
+  onFormSubmit() {
+    this.store.dispatch(
+      userAction.loginUsers({ user: { ...this.userForm.value } })
+    );
+  }
 }
